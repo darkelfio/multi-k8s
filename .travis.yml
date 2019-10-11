@@ -5,7 +5,7 @@ services:
 before_install:
  - docker build -t darkelfio/react-test -f ./client/Dockerfile.dev ./client
 
-script:f
+script:
  - docker run -e CI=true darkelfio/react-test npm test
 
 after_success:
