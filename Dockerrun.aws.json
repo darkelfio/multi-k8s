@@ -1,0 +1,33 @@
+{
+  "AWSEBDockerrunVersion" : 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "darkelfio/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "darkelfio/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "darkelfio/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "darkelfio/multi-nginx",
+      "essential": true,
+      "portMappings": [
+        "hostPort": 80,
+        "containerPort": 80
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
