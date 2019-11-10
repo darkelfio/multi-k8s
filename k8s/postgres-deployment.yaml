@@ -12,6 +12,10 @@ spec:
       labels:
         component: postgres
     spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
       containers:
         - name: postgres
           image: postgres
@@ -27,10 +31,6 @@ spec:
         - name: data
           mountPath: /var/lib/postgresql/data
           subPath: data
-  volumes:
-    - name: data
-      persistentVolumeClaim:
-        claimName: data
 ---
 # Request a persistent volume from the cluster using a Persistent Volume Claim.
 kind: PersistentVolumeClaim
@@ -43,4 +43,4 @@ spec:
   accessModes: [ReadWriteOnce]
   resources:
     requests:
-      storage: 1Gi        
+      storage: 1Gi
